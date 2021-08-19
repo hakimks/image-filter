@@ -40,14 +40,14 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
      return res.status(400).send("URL for the image was not found");
     }
 
-   
     await filterImageFromURL(imageUrl).then(value => {
         res.sendFile(value, function (err) {
           if(err){
             res.status(400).send("The image could not be send");
           } else{
-            deleteLocalFiles(imageUrl);
-            // res.status(200).send("Image uploaded successfuly");
+            
+              deleteLocalFiles(imageUrl);
+          
           }
         });
     });
