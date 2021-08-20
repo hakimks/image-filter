@@ -39,8 +39,8 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     if( !imageUrl) {
      return res.status(400).send("URL for the image was not found");
     }
-
-    await filterImageFromURL(imageUrl).then(value => {
+    try {
+      await filterImageFromURL(imageUrl).then(value => {
         res.sendFile(value, function (err) {
           if(err){
             res.status(400).send("The image could not be send");
@@ -51,7 +51,10 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
           }
         });
     });
-
+    } catch (error) {
+      console.log(error);
+      res.status(422).send("The image url could not be processed");
+    }
     
 
   });
